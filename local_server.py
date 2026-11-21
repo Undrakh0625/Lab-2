@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Single-threaded practice endpoint with a deliberate 100 ms response delay."""
+"""Multi-threaded practice endpoint (10 worker slots) with a 100 ms response delay."""
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from threading import BoundedSemaphore
 import time
