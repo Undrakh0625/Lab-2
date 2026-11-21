@@ -1,0 +1,18 @@
+import http from 'k6/http';
+import { check } from 'k6';
+
+const target = __ENV.TARGET_URL || 'http://127.0.0.1:8000/slow';
+
+export const options = {
+  stages: [
+    { duration: '30s', target: 5 },
+    { duration: '1m', target: 30 },
+    { duration: '30s', target: 100 },
+    { duration: '30s', target: 0 },
+  ],
+};
+
+export default function () {
+  const res = http.get(target);
+  check(res, { 'status 200 байна': (r) => r.status === 200 });
+}
